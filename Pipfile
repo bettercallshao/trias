@@ -12,6 +12,7 @@ pytest = "*"
 flask = "*"
 pika = "*"
 websockets = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"
