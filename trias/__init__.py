@@ -2,4 +2,4 @@
 """Interface to output wsgi object."""
 
 
-from ._app import app  # noqa
+from ._frontend import app as frontend  # noqa

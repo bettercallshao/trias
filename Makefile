@@ -3,8 +3,12 @@
 install:
 	pipenv install
 
+initdb:
+	CONN_STR=postgres://postgres:postgres@localhost:5432/trias \
+	pipenv run python -c 'import trias.admin; trias.admin.init_db()'
+
 dev:
-	pipenv run gunicorn trias:app
+	pipenv run gunicorn trias:frontend
 
 test:
 	pipenv run pytest

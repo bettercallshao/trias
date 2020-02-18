@@ -13,6 +13,9 @@ flask = "*"
 pika = "*"
 websockets = "*"
 gunicorn = "*"
+sqlalchemy = "*"
+psycopg2 = "*"
+sqlalchemy-utils = "*"
 
 [requires]
 python_version = "3.8"
