@@ -23,7 +23,7 @@ class Room(Base):
     id = Column(Integer, primary_key=True)
     title = Column(Text)
     session = Column(Text)
-    timestamp = Column(DateTime)
+    updated = Column(DateTime)
 
 
 def sample_scripts():
