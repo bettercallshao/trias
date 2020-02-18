@@ -3,6 +3,10 @@
 
 from sqlalchemy import Text, Column, Integer, DateTime
 from sqlalchemy.ext.declarative import declarative_base
+import os
+
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 Base = declarative_base()
 
@@ -22,7 +26,7 @@ class Room(Base):
     __tablename__ = 'room'
     id = Column(Integer, primary_key=True)
     title = Column(Text)
-    session = Column(Text)
+    worker = Column(Text)
     updated = Column(DateTime)
 
 
@@ -56,3 +60,14 @@ def sample_rooms():
             title = "teo"
         )
     ]
+
+
+def get_engine():
+    # Get connection string from env and create connection
+    conn_str = os.getenv('CONN_STR')
+    assert conn_str
+    return create_engine(conn_str)
+
+
+def get_session(engine):
+    return sessionmaker(bind=engine)()
