@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 """Script table definition."""
 
-from sqlalchemy import Text, Column, Integer, DateTime
-from sqlalchemy.ext.declarative import declarative_base
 import os
 
-from sqlalchemy import create_engine
+from sqlalchemy import Text, Column, Integer, DateTime, create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
@@ -54,10 +53,10 @@ def sample_scripts():
 def sample_rooms():
     return [
         Room(
-            title = "itza"
+            title="itza",
         ),
         Room(
-            title = "teo"
+            title="teo",
         )
     ]
 

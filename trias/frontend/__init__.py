@@ -2,4 +2,4 @@
 """Interface to frontend."""
 
 
-from ._app import app # noqa
+from ._app import app  # noqa

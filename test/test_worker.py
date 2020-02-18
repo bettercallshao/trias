@@ -2,11 +2,11 @@
 """Tests for worker module."""
 
 
-from trias.admin import init_db
-from trias.backend._worker import take_room, keep_room, update_period
-from trias.database.table import get_engine, get_session
 from time import sleep
 
+from trias.admin import init_db
+from trias.database.table import get_engine, get_session
+from trias.backend._worker import keep_room, take_room, update_period
 
 worker_a = 'test_a'
 worker_b = 'test_b'
@@ -22,7 +22,7 @@ def test_take_room():
     assert room_a == (1, 'itza')
     room_b = take_room(session, worker_b)
     assert room_b == (2, 'teo')
-    assert take_room(session, worker_c) == None
+    assert not take_room(session, worker_c)
 
 
 def test_keep_room():
@@ -35,4 +35,4 @@ def test_keep_room():
     sleep(update_period() + 1)
 
     take_room(session, worker_b)
-    assert keep_room(session, worker_a, room_id) == False
+    assert not keep_room(session, worker_a, room_id)

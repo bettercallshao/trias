@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 """Flask app layer."""
 
-import os
-
-
-from sqlalchemy import create_engine, update, select, func, text, or_, and_
-from ..database.table import get_session, get_engine, Room
+from time import sleep
 from uuid import uuid4
 from random import random
-from time import sleep
 from logging import getLogger
+
+from sqlalchemy import or_, and_, func, text, select, update
+
+from ..database.table import Room, get_engine, get_session
 
 
 def update_period():
@@ -23,7 +22,7 @@ def take_room(session, worker_id):
         [Room.id]
     ).where(
         or_(Room.worker == worker_id,
-            Room.updated == None,
+            Room.updated == None, # noqa
             Room.updated < (
                 func.now() -
                 text("interval '{} seconds'".format(update_period()))

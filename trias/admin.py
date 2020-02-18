@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 """Admin routines."""
 
-import os
 
-from sqlalchemy import create_engine, update, select, func, text, or_
 from sqlalchemy_utils import create_database, database_exists
 
-from .database.table import Base, sample_scripts, sample_rooms, Room, get_engine, get_session
 from .backend import _worker as worker
-
+from .database.table import Base, get_engine, get_session, sample_rooms, sample_scripts
 
 
 def init_db():
