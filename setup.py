@@ -4,7 +4,7 @@
 from setuptools import setup
 
 _locals = {}
-with open('trias/_version.py') as fp:
+with open('trias/version.py') as fp:
     exec(fp.read(), None, _locals) # noqa
 version = _locals['version']
 

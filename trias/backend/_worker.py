@@ -5,7 +5,7 @@ import os
 
 
 from sqlalchemy import create_engine, update, select, func, text, or_, and_
-from ._table import get_session, get_engine, Room
+from ..database.table import get_session, get_engine, Room
 from uuid import uuid4
 from random import random
 from time import sleep
