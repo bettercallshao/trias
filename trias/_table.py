@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Script table definition."""
 
-from sqlalchemy import Text, Column, Integer
+from sqlalchemy import Text, Column, Integer, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -16,6 +16,14 @@ class Script(Base):
     optionb = Column(Text)
     optionc = Column(Text)
     answer = Column(Text)
+
+
+class Room(Base):
+    __tablename__ = 'room'
+    id = Column(Integer, primary_key=True)
+    title = Column(Text)
+    session = Column(Text)
+    timestamp = Column(DateTime)
 
 
 def sample_scripts():
@@ -36,4 +44,15 @@ def sample_scripts():
             optionc='8',
             answer='c',
         ),
+    ]
+
+
+def sample_rooms():
+    return [
+        Room(
+            title = "itza"
+        ),
+        Room(
+            title = "teo"
+        )
     ]

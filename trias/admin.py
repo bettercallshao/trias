@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Flask app layer."""
+"""Admin routines."""
 
 import os
 
@@ -7,7 +7,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import create_database, database_exists
 
-from ._table import Base, sample_scripts
+from ._table import Base, sample_scripts, sample_rooms
 
 
 def init_db():
@@ -24,8 +24,8 @@ def init_db():
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
 
-    # Add sample script rows
+    # Add sample rows
     session = sessionmaker(bind=engine)()
-    for script in sample_scripts():
-        session.add(script)
+    session.bulk_save_objects(sample_scripts())
+    session.bulk_save_objects(sample_rooms())
     session.commit()
