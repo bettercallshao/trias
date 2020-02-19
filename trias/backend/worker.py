@@ -8,7 +8,7 @@ import threading
 from time import sleep
 from uuid import uuid4
 
-from . import roomer
+from . import gamer, roomer
 from ..database.table import get_engine, get_session
 
 
@@ -47,7 +47,11 @@ def work():
     threads = {
         'room': threading.Thread(
             target=roomer.keep_room_block,
-            args=(stop, session, worker_id, room_id)
+            args=(stop, worker_id, room_id)
+        ),
+        'game': threading.Thread(
+            target=gamer.game_block,
+            args=(stop, room_id)
         ),
     }
     for key, thread in threads.items():

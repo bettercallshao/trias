@@ -7,7 +7,7 @@ from random import random
 
 from sqlalchemy import or_, and_, func, text, select, update
 
-from ..database.table import Room
+from ..database.table import Room, get_engine, get_session
 
 
 def update_period():
@@ -88,7 +88,8 @@ def take_room_block(session, worker_id):
         sleep(update_period() + 1 + random())
 
 
-def keep_room_block(stop, session, worker_id, room_id):
+def keep_room_block(stop, worker_id, room_id):
     """Block and keep the room until we don't have a room"""
+    session = get_session(get_engine())
     while not stop() and keep_room(session, worker_id, room_id):
         sleep(update_period())
