@@ -1,6 +1,6 @@
 .PHONY: test
 
-ENV=PYTHONPATH=. CONN_STR=postgresql://postgres:postgres@localhost:5432/trias
+ENV=PYTHONPATH=. CONN_STR=postgresql://postgres:postgres@localhost:5432/trias RMQ_HOST=localhost
 
 # Auxillary tasks
 
@@ -26,6 +26,9 @@ backend:
 
 test:
 	${ENV} pipenv run pytest -v
+
+term:
+	${ENV} pipenv run python
 
 # Admin tasks
 

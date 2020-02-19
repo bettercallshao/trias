@@ -3,15 +3,17 @@ services:
   rabbitmq:
     image: rabbitmq:3
     hostname: trias
+    ports:
+    - 5672:5672
 
   postgres:
     image: postgres
     ports:
-      - 5432:5432
+    - 5432:5432
     environment:
       POSTGRES_PASSWORD: postgres
     volumes:
-      - pgdata:/var/lib/postgresql/data
+    - pgdata:/var/lib/postgresql/data
 
 volumes:
   pgdata:

@@ -66,6 +66,8 @@ def work():
         sleep(5)
 
     cancel[0] = True
+    for thread in threads.values():
+        thread.join(0)
 
     log(f'Dropping room id={room_id}, title={room_title}')
     log(f'Exiting')
