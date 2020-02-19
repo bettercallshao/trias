@@ -4,9 +4,9 @@
 
 from time import sleep
 
-from trias.database.admin import create, load_samples
+from trias.backend.roomer import keep_room, take_room, update_period
+from trias.database.admin import load_samples, create_tables
 from trias.database.table import get_engine, get_session
-from trias.backend._roomer import keep_room, take_room, update_period
 
 worker_a = 'test_a'
 worker_b = 'test_b'
@@ -14,7 +14,7 @@ worker_c = 'test_c'
 
 
 def test_take_room():
-    create()
+    create_tables()
     load_samples()
     session = get_session(get_engine())
 
@@ -26,7 +26,7 @@ def test_take_room():
 
 
 def test_keep_room():
-    create()
+    create_tables()
     load_samples()
     session = get_session(get_engine())
 

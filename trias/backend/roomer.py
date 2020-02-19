@@ -2,17 +2,21 @@
 """Backend room logic."""
 
 
+from time import sleep
+from random import random
+
 from sqlalchemy import or_, and_, func, text, select, update
 
 from ..database.table import Room
 
 
 def update_period():
+    """Heart beat period"""
     return 3
 
 
 def take_room(session, worker_id):
-
+    """Try to take a room"""
     # Query 1 or 0 room with out dated timestamp
     find_query = select(
         [Room.id]
@@ -59,6 +63,7 @@ def take_room(session, worker_id):
 
 
 def keep_room(session, worker_id, room_id):
+    """Try to keep a room"""
     # Update room current timestamp
     query = update(
         Room
@@ -72,3 +77,18 @@ def keep_room(session, worker_id, room_id):
     session.commit()
 
     return proxy.rowcount == 1
+
+
+def take_room_block(session, worker_id):
+    """Blocks until a room is available"""
+    while True:
+        room = take_room(session, worker_id)
+        if room:
+            return room
+        sleep(update_period() + 1 + random())
+
+
+def keep_room_block(stop, session, worker_id, room_id):
+    """Block and keep the room until we don't have a room"""
+    while not stop() and keep_room(session, worker_id, room_id):
+        sleep(update_period())

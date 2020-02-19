@@ -39,7 +39,7 @@ def sample_rooms():
     ]
 
 
-def create():
+def create_tables():
 
     engine = get_engine()
 

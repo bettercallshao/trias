@@ -1,15 +1,11 @@
 .PHONY: test
 
+ENV=PYTHONPATH=. CONN_STR=postgresql://postgres:postgres@localhost:5432/trias
+
+# Auxillary tasks
+
 install:
 	pipenv install
-
-dev:
-	pipenv run gunicorn trias:frontend
-
-test:
-	CONN_STR=postgresql://postgres:postgres@localhost:5432/trias \
-	PYTHONPATH=. \
-	pipenv run pytest -v
 
 lint:
 	pipenv run isort -y && pipenv run flake8
@@ -20,12 +16,21 @@ up:
 down:
 	docker-compose down
 
-# admin tasks
+# Development tasks
 
-initdb:
-	CONN_STR=postgresql://postgres:postgres@localhost:5432/trias \
-	pipenv run python -c 'import trias.admin; trias.admin.init_db()'
+frontend:
+	pipenv run gunicorn trias.frontend.app:app
 
-takeroom:
-	CONN_STR=postgresql://postgres:postgres@localhost:5432/trias \
-	pipenv run python -c 'import trias.admin; trias.admin.take_room()'
+backend:
+	${ENV} pipenv run python -c 'from trias.backend.worker import work; work()'
+
+test:
+	${ENV} pipenv run pytest -v
+
+# Admin tasks
+
+db_init:
+	${ENV} pipenv run python -c 'import trias.database.admin as db; db.create_tables(); db.load_samples()'
+
+take_room:
+	${ENV} pipenv run python -c 'import trias.backend.admin as be; be.take_room()'
