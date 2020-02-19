@@ -29,38 +29,6 @@ class Room(Base):
     updated = Column(DateTime)
 
 
-def sample_scripts():
-    return [
-        Script(
-            title='Dragon Ball',
-            question='What is 7 + 7',
-            optiona='7',
-            optionb='14',
-            optionc='77',
-            answer='b',
-        ),
-        Script(
-            title='Canada Day',
-            question='What is 7 + 1',
-            optiona='71',
-            optionb='17',
-            optionc='8',
-            answer='c',
-        ),
-    ]
-
-
-def sample_rooms():
-    return [
-        Room(
-            title="itza",
-        ),
-        Room(
-            title="teo",
-        )
-    ]
-
-
 def get_engine():
     # Get connection string from env and create connection
     conn_str = os.getenv('CONN_STR')
