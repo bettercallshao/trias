@@ -19,7 +19,7 @@ down:
 # Development tasks
 
 frontend:
-	pipenv run gunicorn trias.frontend.app:app
+	${ENV} pipenv run gunicorn -k flask_sockets.worker trias.frontend.app:app
 
 backend:
 	${ENV} pipenv run python -c 'from trias.backend.worker import work; work()'

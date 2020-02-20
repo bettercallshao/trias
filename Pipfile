@@ -16,6 +16,7 @@ gunicorn = "*"
 sqlalchemy = "*"
 psycopg2 = "*"
 sqlalchemy-utils = "*"
+flask-sockets = "*"
 
 [requires]
 python_version = "3.8"

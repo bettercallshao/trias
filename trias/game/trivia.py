@@ -94,6 +94,7 @@ class Trivia(object):
                 return {
                     'type': ACCEPT,
                     'session_id': self.session_id,
+                    'count': self.start_count,
                 }
 
         # Game in progress

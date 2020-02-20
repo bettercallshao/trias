@@ -3,7 +3,10 @@
 <head>
   <title>trias</title>
 <body>
-  <script>
-  </script>
+  <ul>
+    {% for room in rooms %}
+        <li><a href="/room/{{ room.id }}">room {{ room.title }}</a></li>
+    {% endfor %}
+  </ul>
 </body>
 </html>
